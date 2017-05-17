@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SoftwareEngineering2.Visitor;
+
 
 namespace SoftwareEngineering2
 {
@@ -9,6 +11,9 @@ namespace SoftwareEngineering2
     /// </summary>
     public class Game1 : Game
     {
+        private IVisitor drawVisitor;
+        private IVisitor updateVisitor;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -16,6 +21,8 @@ namespace SoftwareEngineering2
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            drawVisitor = new DrawVisitor();
+            updateVisitor = new UpdateVisitor();
         }
 
         /// <summary>
