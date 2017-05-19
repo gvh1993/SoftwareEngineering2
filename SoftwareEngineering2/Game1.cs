@@ -1,7 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SoftwareEngineering2.Visitor;
+using SoftwareEngineering2.InterfaceObjects;
 
 
 namespace SoftwareEngineering2
@@ -11,18 +14,22 @@ namespace SoftwareEngineering2
     /// </summary>
     public class Game1 : Game
     {
-        private IVisitor drawVisitor;
-        private IVisitor updateVisitor;
+        private IVisitor _drawVisitor;
+        private IVisitor _updateVisitor;
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private Label _label;
+        private TextField _textField;
+        private Button _button;
+
+        readonly GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+
+        public static SpriteFont font;
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            drawVisitor = new DrawVisitor();
-            updateVisitor = new UpdateVisitor();
         }
 
         /// <summary>
@@ -33,8 +40,8 @@ namespace SoftwareEngineering2
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // Add your initialization logic here
+            IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -45,9 +52,17 @@ namespace SoftwareEngineering2
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("font");
+            
             // TODO: use this.Content to load your game content here
+            _drawVisitor = new DrawVisitor(_spriteBatch);
+            _updateVisitor = new UpdateVisitor(_spriteBatch);
+
+            _label = new Label("I am a label", new Vector2(50, 35), Color.Black);
+            _textField = new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20));
+            _button = new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20));
+
         }
 
         /// <summary>
@@ -70,6 +85,8 @@ namespace SoftwareEngineering2
                 Exit();
 
             // TODO: Add your update logic here
+            _updateVisitor.Visit(_button);
+            _updateVisitor.Visit(_textField);
 
             base.Update(gameTime);
         }
@@ -83,7 +100,10 @@ namespace SoftwareEngineering2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            _drawVisitor.Visit(_button);
+            _drawVisitor.Visit(_label);
+            _drawVisitor.Visit(_textField);
+            
             base.Draw(gameTime);
         }
     }
