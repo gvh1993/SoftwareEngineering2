@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SoftwareEngineering2.Visitor;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SoftwareEngineering2.InterfaceObjects
 {
-    class Label : IInterfaceObject
+    class Label : IGuiElement
     {
         public string LabelText { get; set; }
         public Vector2 Position { get; set; }
@@ -24,6 +25,18 @@ namespace SoftwareEngineering2.InterfaceObjects
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+            spriteBatch.DrawString(Game1.font, LabelText, Position, TextColor);
+            spriteBatch.End();
+        }
+
+        public void Update()
+        {
+
         }
     }
 }

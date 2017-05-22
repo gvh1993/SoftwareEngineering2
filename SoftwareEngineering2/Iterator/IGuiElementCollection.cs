@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace SoftwareEngineering2.Iterator
 {
-    interface IIterator
+    interface IGuiElementCollection
     {
-        IGuiElement Next();
-        bool HasNext();
+        void AddGuiElement(IGuiElement guiElement);
+        void RemoveGuiElement(IGuiElement guiElement);
+
+        IIterator Iterator();
     }
 }

@@ -22,3 +22,27 @@ F:\SoftwareEngineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.
 F:\SoftwareEngineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.exe
 F:\SoftwareEngineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.pdb
 F:\SoftwareEngineering2\SoftwareEngineering2\bin\Windows\x86\Debug\Content\font.xnb
+D:\Github\Software engineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.csprojResolveAssemblyReference.cache
+D:\Github\Software engineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.exe
+D:\Github\Software engineering2\SoftwareEngineering2\obj\x86\Debug\SoftwareEngineering2.pdb
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\Content\font.xnb
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SoftwareEngineering2.exe
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SoftwareEngineering2.pdb
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Github\Software engineering2\SoftwareEngineering2\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml

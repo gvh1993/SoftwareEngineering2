@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SoftwareEngineering2.Visitor;
 using SoftwareEngineering2.InterfaceObjects;
-
+using SoftwareEngineering2.Iterator;
 
 namespace SoftwareEngineering2
 {
@@ -17,9 +17,12 @@ namespace SoftwareEngineering2
         private IVisitor _drawVisitor;
         private IVisitor _updateVisitor;
 
-        private Label _label;
-        private TextField _textField;
-        private Button _button;
+        IGuiElementCollection collection;
+        
+
+        //private Label _label;
+        //private TextField _textField;
+        //private Button _button;
 
         readonly GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
@@ -30,6 +33,8 @@ namespace SoftwareEngineering2
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            collection = new GuiElementCollection();
+            
         }
 
         /// <summary>
@@ -59,9 +64,13 @@ namespace SoftwareEngineering2
             _drawVisitor = new DrawVisitor(_spriteBatch);
             _updateVisitor = new UpdateVisitor(_spriteBatch);
 
-            _label = new Label("I am a label", new Vector2(50, 35), Color.Black);
-            _textField = new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20));
-            _button = new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20));
+            collection.AddGuiElement(new Label("I am a label", new Vector2(50, 35), Color.Black));
+            collection.AddGuiElement(new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20)));
+            collection.AddGuiElement(new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20)));
+
+            //_label = new Label("I am a label", new Vector2(50, 35), Color.Black);
+            //_textField = new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20));
+            //_button = new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20));
 
         }
 
@@ -84,9 +93,13 @@ namespace SoftwareEngineering2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+
+            IIterator iterator = collection.Iterator();
             // TODO: Add your update logic here
-            _updateVisitor.Visit(_button);
-            _updateVisitor.Visit(_textField);
+            while (iterator.HasNext())
+            {
+                _updateVisitor.Visit(iterator.Next());
+            }
 
             base.Update(gameTime);
         }
@@ -100,9 +113,11 @@ namespace SoftwareEngineering2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _drawVisitor.Visit(_button);
-            _drawVisitor.Visit(_label);
-            _drawVisitor.Visit(_textField);
+            IIterator iterator = collection.Iterator();
+            while (iterator.HasNext())
+            {
+                _drawVisitor.Visit(iterator.Next());
+            }
             
             base.Draw(gameTime);
         }
