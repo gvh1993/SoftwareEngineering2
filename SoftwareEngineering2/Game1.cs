@@ -67,11 +67,6 @@ namespace SoftwareEngineering2
             collection.AddGuiElement(new Label("I am a label", new Vector2(50, 35), Color.Black));
             collection.AddGuiElement(new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20)));
             collection.AddGuiElement(new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20)));
-
-            //_label = new Label("I am a label", new Vector2(50, 35), Color.Black);
-            //_textField = new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20));
-            //_button = new Button(Color.Black, Color.White, new Vector2(50, 150), "Exit", new Texture2D(_graphics.GraphicsDevice, 75, 20));
-
         }
 
         /// <summary>

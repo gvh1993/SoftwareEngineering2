@@ -10,14 +10,14 @@ namespace SoftwareEngineering2.Iterator
     class GuiElementIterator : IIterator
     {
         private List<IGuiElement> _guiElements;
-        private int position;
+        private int _position;
         public GuiElementIterator(List<IGuiElement> guiElements)
         {
             _guiElements = guiElements;
         }
         public bool HasNext()
         {
-            if (position < _guiElements.Count())
+            if (_position < _guiElements.Count())
             {
                 return true;
             }
@@ -26,8 +26,8 @@ namespace SoftwareEngineering2.Iterator
 
         public IGuiElement Next()
         {
-            IGuiElement guiElement = _guiElements[position];
-            position++;
+            IGuiElement guiElement = _guiElements[_position];
+            _position++;
             return guiElement;
         }
     }
