@@ -17,14 +17,16 @@ namespace SoftwareEngineering2.InterfaceObjects
         public Vector2 Position { get; set; }
         public string ButtonText { get; set; }
         public Texture2D Texture { get; set; }
+        public ScreenManager GoToWindow { get; set; }
 
-        public Button(Color backgroundColor, Color hoverBackgroundColor, Vector2 position, string buttonText, Texture2D texture)
+        public Button(Color backgroundColor, Color hoverBackgroundColor, Vector2 position, string buttonText, Texture2D texture, ScreenManager goToWindow)
         {
             BackgroundColor = backgroundColor;
             HoverBackgroundColor = hoverBackgroundColor;
             Position = position;
             ButtonText = buttonText;
             Texture = texture;
+            GoToWindow = goToWindow;
         }
 
         public void Accept(IVisitor visitor)
@@ -50,7 +52,7 @@ namespace SoftwareEngineering2.InterfaceObjects
             spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height), BackgroundColor);
 
             //textScale
-            Vector2 size = Game1.font.MeasureString(ButtonText);
+            Vector2 size = Game1.Font.MeasureString(ButtonText);
             float xScale = (Texture.Width / size.X);
             float yScale = (Texture.Height / size.Y);
             float scale = Math.Min(xScale, yScale);
@@ -58,7 +60,7 @@ namespace SoftwareEngineering2.InterfaceObjects
             Vector2 stringDimensions = new Vector2((int)Math.Round(size.X * scale), (int)Math.Round(size.Y * scale));
             Vector2 buttonLabelPosition = new Vector2(Position.X + (Texture.Width / 2) - (stringDimensions.X / 2), Position.Y + (Texture.Height / 2) - (stringDimensions.Y / 2));
 
-            spriteBatch.DrawString(Game1.font, ButtonText, buttonLabelPosition, Color.White, 0.0f, new Vector2(0, 0), scale, new SpriteEffects(), 0.0f);
+            spriteBatch.DrawString(Game1.Font, ButtonText, buttonLabelPosition, Color.White, 0.0f, new Vector2(0, 0), scale, new SpriteEffects(), 0.0f);
 
             spriteBatch.End();
         }
@@ -69,13 +71,17 @@ namespace SoftwareEngineering2.InterfaceObjects
             if (!(Mouse.GetState().Position.X < (Position.X + Texture.Width)) ||
                 !(Mouse.GetState().Position.X > Position.X) ||
                 !(Mouse.GetState().Position.Y < (Position.Y + Texture.Height)) ||
-                !(Mouse.GetState().Position.Y > Position.Y)) return;
+                !(Mouse.GetState().Position.Y > Position.Y))
+            {
+                BackgroundColor = Color.Black;
+                return;
+            }
             // IsHOVERING
-
+            BackgroundColor = Color.Red;
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 // IS clicked
-
+                Game1.CurrentScreen = GoToWindow;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace SoftwareEngineering2.InterfaceObjects
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(Game1.font, LabelText, Position, TextColor);
+            spriteBatch.DrawString(Game1.Font, LabelText, Position, TextColor);
             spriteBatch.End();
         }
 

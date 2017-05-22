@@ -9,27 +9,27 @@ namespace SoftwareEngineering2.Iterator
 {
     class GuiElementCollection : IGuiElementCollection
     {
-        private List<IGuiElement> _guiElements;
 
+        public List<IGuiElement> GuiElements { get; set; }
 
-        public GuiElementCollection()
+        public GuiElementCollection(List<IGuiElement> guiElements)
         {
-            _guiElements = new List<IGuiElement>();
+            GuiElements = guiElements;
         }
 
         public void AddGuiElement(IGuiElement guiElement)
         {
-            _guiElements.Add(guiElement);
+            GuiElements.Add(guiElement);
         }
 
         public void RemoveGuiElement(IGuiElement guiElement)
         {
-            _guiElements.Remove(guiElement);
+            GuiElements.Remove(guiElement);
         }
 
         public IIterator Iterator()
         {
-            return new GuiElementIterator(_guiElements);
+            return new GuiElementIterator(GuiElements);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace SoftwareEngineering2.InterfaceObjects
                 text += Text[i];
             }
 
-            spriteBatch.DrawString(Game1.font, text, Position, TextColor);
+            spriteBatch.DrawString(Game1.Font, text, Position, TextColor);
 
             spriteBatch.End();
         }
