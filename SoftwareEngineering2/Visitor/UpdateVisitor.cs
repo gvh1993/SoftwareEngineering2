@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SoftwareEngineering2.InterfaceObjects;
 using Microsoft.Xna.Framework;
+using SoftwareEngineering2.Adapter;
 
 namespace SoftwareEngineering2.Visitor
 {

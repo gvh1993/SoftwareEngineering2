@@ -18,8 +18,9 @@ namespace SoftwareEngineering2.InterfaceObjects
         public List<char> Text { get; set; }
         public Texture2D Texture { get; set; }
         public int Cursor { get; set; }
+        public string TextString { get; set; }
 
-        public TextField(Color backgroundColor, Color textColor, Vector2 position, List<char> text, Texture2D texture )
+        public TextField(Color backgroundColor, Color textColor, Vector2 position, List<char> text, Texture2D texture)
         {
             BackgroundColor = backgroundColor;
             TextColor = textColor;
@@ -101,7 +102,7 @@ namespace SoftwareEngineering2.InterfaceObjects
             //        }
 
             //        break;
-            }
         }
     }
 }
+

@@ -19,8 +19,8 @@ namespace SoftwareEngineering2.InterfaceObjects
         public string ButtonText { get; set; }
         public Texture2D Texture { get; set; }
         public ScreenManager GoToWindow { get; set; }
-        public Vector2 ButtonLabelPosition { get; set; }
         public float Scale { get; set; }
+        public Vector2 ButtonLabelPosition { get; set; }
 
         public Button(Color backgroundColor, Color hoverBackgroundColor, Vector2 position, string buttonText, Texture2D texture, ScreenManager goToWindow)
         {

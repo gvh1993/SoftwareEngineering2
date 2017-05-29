@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SoftwareEngineering2.InterfaceObjects;
+using SoftwareEngineering2.Adapter;
 
 namespace SoftwareEngineering2.Visitor
 {
@@ -25,7 +26,9 @@ namespace SoftwareEngineering2.Visitor
         public void Visit(Button button)
         {
             //draw my button
-            _spriteBatch.Begin();
+            //use adapter
+            //_spriteBatch.Begin();
+
             //fill in the pixels of the texture2D
             Color[] colorData = new Color[button.Texture.Width * button.Texture.Height];
 
@@ -35,30 +38,34 @@ namespace SoftwareEngineering2.Visitor
             }
 
             button.Texture.SetData(colorData);
+            //
+            
 
             //textScale
             Vector2 size = Game1.Font.MeasureString(button.ButtonText);
             float xScale = (button.Texture.Width / size.X);
             float yScale = (button.Texture.Height / size.Y);
-            float scale = Math.Min(xScale, yScale);
+            button.Scale = Math.Min(xScale, yScale);
 
-            Vector2 stringDimensions = new Vector2((int)Math.Round(size.X * scale), (int)Math.Round(size.Y * scale));
-            Vector2 buttonLabelPosition = new Vector2(button.Position.X + (button.Texture.Width / 2) - (stringDimensions.X / 2), button.Position.Y + (button.Texture.Height / 2) - (stringDimensions.Y / 2));
-
-            _spriteBatch.End();
+            Vector2 stringDimensions = new Vector2((int)Math.Round(size.X * button.Scale), (int)Math.Round(size.Y * button.Scale));
+            button.ButtonLabelPosition = new Vector2(button.Position.X + (button.Texture.Width / 2) - (stringDimensions.X / 2), button.Position.Y + (button.Texture.Height / 2) - (stringDimensions.Y / 2));
+            
+            //
+            //_spriteBatch.End();
+            IDrawingManager drawingManager = new MonoGameDrawingManager(_spriteBatch);
+            drawingManager.Draw(button);
         }
 
         public void Visit(Label label)
         {
-            _spriteBatch.Begin();
-            _spriteBatch.DrawString(Game1.Font, label.LabelText, label.Position, label.TextColor);
-            _spriteBatch.End();
+            IDrawingManager drawingManager = new MonoGameDrawingManager(_spriteBatch);
+            drawingManager.Draw(label);
         }
 
         public void Visit(TextField textField)
         {
             // draw the textfield
-            _spriteBatch.Begin();
+           // _spriteBatch.Begin();
 
             //draw the box
             //fill in the pixels of the texture2D
@@ -71,24 +78,23 @@ namespace SoftwareEngineering2.Visitor
 
             textField.Texture.SetData(colorData);
 
-            _spriteBatch.Draw(textField.Texture, new Rectangle((int)textField.Position.X, (int)textField.Position.Y, (int)textField.Texture.Width, (int)textField.Texture.Height), textField.BackgroundColor);
+            
 
             //draw the text + cursor
 
-            string text = "";
+            textField.TextString = "";
             for (int i = 0; i < textField.Text.Count; i++)
             {
                 //check if cursor is on this place
                 if (textField.Cursor == i)
                 {
-                    text += "|";
+                    textField.TextString += "|";
                 }
-                text += textField.Text[i];
+                textField.TextString += textField.Text[i];
             }
 
-            _spriteBatch.DrawString(Game1.Font, text, textField.Position, textField.TextColor);
-
-            _spriteBatch.End();
+            IDrawingManager drawingManager = new MonoGameDrawingManager(_spriteBatch);
+            drawingManager.Draw(textField);
         }
     }
 }
