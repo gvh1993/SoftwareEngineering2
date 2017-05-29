@@ -41,7 +41,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Adapter\DrawingManager.cs" />
+    <Compile Include="Adapter\JavaFXDrawingManager.cs" />
+    <Compile Include="Adapter\MonoGameDrawingManager.cs" />
     <Compile Include="Adapter\IDrawingManager.cs" />
     <Compile Include="Adapter\IInputManager.cs" />
     <Compile Include="Adapter\InputManager.cs" />
@@ -74,7 +75,6 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Content\font.spritefont" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

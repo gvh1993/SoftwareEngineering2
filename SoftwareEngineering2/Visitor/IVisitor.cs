@@ -9,6 +9,9 @@ namespace SoftwareEngineering2.Visitor
 {
     interface IVisitor
     {
-        void Visit(IGuiElement guiElement);
+        //void Visit(IGuiElement guiElement);
+        void Visit(Button button);
+        void Visit(Label label);
+        void Visit(TextField textField);
     }
 }

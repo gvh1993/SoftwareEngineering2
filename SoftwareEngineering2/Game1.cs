@@ -121,7 +121,9 @@ namespace SoftwareEngineering2
             IIterator iterator = collection.Iterator();
             while (iterator.HasNext())
             {
-                _updateVisitor.Visit(iterator.Next());
+                var guiElement = iterator.Next();
+                guiElement.Accept(_updateVisitor);
+               // _updateVisitor.Visit(iterator.Next());
             }
 
             // TODO: Add your update logic here
@@ -139,10 +141,7 @@ namespace SoftwareEngineering2
                 case ScreenManager.Exit:
                     //Exit();
                     break;
-
             }
-            
-
             base.Update(gameTime);
         }
 
@@ -173,7 +172,9 @@ namespace SoftwareEngineering2
             IIterator iterator = collection.Iterator();
             while (iterator.HasNext())
             {
-                _drawVisitor.Visit(iterator.Next());
+                var x = iterator.Next();
+                x.Accept(_drawVisitor);
+                //_drawVisitor.Visit(iterator.Next());
             }
             
             base.Draw(gameTime);

@@ -11,12 +11,14 @@ namespace SoftwareEngineering2.Adapter
     {
         public MouseState GetMouseInput()
         {
-            return new MouseState();
+            MouseState state = Mouse.GetState();
+            return state;
         }
 
         public KeyboardState GetKeyboardInput()
         {
-            return new KeyboardState();
+            KeyboardState state = Keyboard.GetState();
+            return state;
         }
     }
 }

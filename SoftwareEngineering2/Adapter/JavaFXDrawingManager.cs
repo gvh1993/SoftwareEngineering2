@@ -8,16 +8,19 @@ using SoftwareEngineering2.InterfaceObjects;
 
 namespace SoftwareEngineering2.Adapter
 {
-    class DrawingManager : IDrawingManager
+    class JavaFXDrawingManager : IDrawingManager
     {
-        public void DrawMonogame(SpriteBatch spriteBatch)
+        public void Draw(Button button)
         {
             throw new NotImplementedException();
-
-            
         }
 
-        public void DrawJavaFX()
+        public void Draw(TextField textField)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(Label label)
         {
             throw new NotImplementedException();
         }

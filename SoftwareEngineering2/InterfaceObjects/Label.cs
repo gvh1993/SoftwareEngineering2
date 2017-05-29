@@ -29,9 +29,9 @@ namespace SoftwareEngineering2.InterfaceObjects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(Game1.Font, LabelText, Position, TextColor);
-            spriteBatch.End();
+            //spriteBatch.Begin();
+            //spriteBatch.DrawString(Game1.Font, LabelText, Position, TextColor);
+            //spriteBatch.End();
         }
 
         public void Update()
