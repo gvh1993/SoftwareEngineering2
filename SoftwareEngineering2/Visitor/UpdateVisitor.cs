@@ -24,17 +24,19 @@ namespace SoftwareEngineering2.Visitor
         {
             //update button
             //checked if button is hovering
-            if (!(Mouse.GetState().Position.X < (button.Position.X + button.Texture.Width)) ||
-                !(Mouse.GetState().Position.X > button.Position.X) ||
-                !(Mouse.GetState().Position.Y < (button.Position.Y + button.Texture.Height)) ||
-                !(Mouse.GetState().Position.Y > button.Position.Y))
+            IInputManager manager = new InputManager();
+            
+            if (!(manager.GetMouseInput().Position.X < (button.Position.X + button.Texture.Width)) ||
+                !(manager.GetMouseInput().Position.X > button.Position.X) ||
+                !(manager.GetMouseInput().Position.Y < (button.Position.Y + button.Texture.Height)) ||
+                !(manager.GetMouseInput().Position.Y > button.Position.Y))
             {
                 button.BackgroundColor = Color.Black;
                 return;
             }
             // IsHOVERING
             button.BackgroundColor = Color.Red;
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (manager.GetMouseInput().LeftButton == ButtonState.Pressed)
             {
                 // IS clicked
                 Game1.CurrentScreen = button.GoToWindow;
@@ -48,10 +50,12 @@ namespace SoftwareEngineering2.Visitor
 
         public void Visit(TextField textField)
         {
-            if (Keyboard.GetState().GetPressedKeys().Length == 0)
+            IInputManager manager = new InputManager();
+            
+            if (manager.GetKeyboardInput().GetPressedKeys().Length == 0)
                 return;
 
-            var key = Keyboard.GetState().GetPressedKeys()[0];
+            var key = manager.GetKeyboardInput().GetPressedKeys()[0];
             switch (key)
             {
                 case Keys.Space:

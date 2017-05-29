@@ -72,7 +72,7 @@ namespace SoftwareEngineering2
                     new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.InputWindow),
                 new Button(Color.Black, Color.White, new Vector2(250, 100), "Label window",
                     new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.LabelWindow),
-                new Button(Color.Black, Color.White, new Vector2(250, 150), "Exit",
+                new Button(Color.Black, Color.White, new Vector2(250, 250), "Exit",
                     new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.Exit)
             };
 
@@ -93,8 +93,6 @@ namespace SoftwareEngineering2
             };
 
             collection = new GuiElementCollection(mainWindowElements);
-            //_collection.AddGuiElement(new Label("I am a label", new Vector2(50, 35), Color.Black));
-            //_collection.AddGuiElement(new TextField(Color.White, Color.Black, new Vector2(50, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 75, 20)));
 
         }
 
@@ -123,7 +121,6 @@ namespace SoftwareEngineering2
             {
                 var guiElement = iterator.Next();
                 guiElement.Accept(_updateVisitor);
-               // _updateVisitor.Visit(iterator.Next());
             }
 
             // TODO: Add your update logic here
@@ -139,7 +136,7 @@ namespace SoftwareEngineering2
                     UpdateLabelWindow(gameTime);
                     break;
                 case ScreenManager.Exit:
-                    //Exit();
+                    Exit();
                     break;
             }
             base.Update(gameTime);
@@ -174,7 +171,6 @@ namespace SoftwareEngineering2
             {
                 var x = iterator.Next();
                 x.Accept(_drawVisitor);
-                //_drawVisitor.Visit(iterator.Next());
             }
             
             base.Draw(gameTime);
