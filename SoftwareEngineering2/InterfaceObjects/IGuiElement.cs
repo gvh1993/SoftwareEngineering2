@@ -10,8 +10,6 @@ namespace SoftwareEngineering2.InterfaceObjects
 {
     interface IGuiElement
     {
-        void Update();
-        void Draw(SpriteBatch spriteBatch);
         void Accept(IVisitor visitor);
     }
 }

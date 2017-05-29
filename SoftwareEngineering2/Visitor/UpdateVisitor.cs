@@ -20,11 +20,6 @@ namespace SoftwareEngineering2.Visitor
             _spriteBatch = spriteBatch;
         }
 
-        //public void Visit(IGuiElement guiElement)
-        //{
-        //    guiElement.Update();
-        //}
-
         public void Visit(Button button)
         {
             //update button

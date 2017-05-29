@@ -15,20 +15,12 @@ namespace SoftwareEngineering2.Visitor
         private readonly SpriteBatch _spriteBatch;
         public DrawVisitor(SpriteBatch spriteBatch)
         {
-            //need something like spritebatch/screenmanager or something so i can start drawing
             _spriteBatch = spriteBatch;
         }
-        //public void Visit(IGuiElement guiElement)
-        //{
-        //    guiElement.Draw(_spriteBatch);
-        //}
 
         public void Visit(Button button)
         {
             //draw my button
-            //use adapter
-            //_spriteBatch.Begin();
-
             //fill in the pixels of the texture2D
             Color[] colorData = new Color[button.Texture.Width * button.Texture.Height];
 
@@ -38,8 +30,6 @@ namespace SoftwareEngineering2.Visitor
             }
 
             button.Texture.SetData(colorData);
-            //
-            
 
             //textScale
             Vector2 size = Game1.Font.MeasureString(button.ButtonText);
@@ -50,7 +40,6 @@ namespace SoftwareEngineering2.Visitor
             Vector2 stringDimensions = new Vector2((int)Math.Round(size.X * button.Scale), (int)Math.Round(size.Y * button.Scale));
             button.ButtonLabelPosition = new Vector2(button.Position.X + (button.Texture.Width / 2) - (stringDimensions.X / 2), button.Position.Y + (button.Texture.Height / 2) - (stringDimensions.Y / 2));
             
-            //
             //_spriteBatch.End();
             IDrawingManager drawingManager = new MonoGameDrawingManager(_spriteBatch);
             drawingManager.Draw(button);
@@ -65,7 +54,6 @@ namespace SoftwareEngineering2.Visitor
         public void Visit(TextField textField)
         {
             // draw the textfield
-           // _spriteBatch.Begin();
 
             //draw the box
             //fill in the pixels of the texture2D
@@ -81,7 +69,6 @@ namespace SoftwareEngineering2.Visitor
             
 
             //draw the text + cursor
-
             textField.TextString = "";
             for (int i = 0; i < textField.Text.Count; i++)
             {

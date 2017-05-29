@@ -11,7 +11,7 @@ namespace SoftwareEngineering2.Adapter
 {
     class MonoGameDrawingManager : IDrawingManager
     {
-        private SpriteBatch _spriteBatch;
+        private readonly SpriteBatch _spriteBatch;
         public MonoGameDrawingManager(SpriteBatch spriteBatch)
         {
             _spriteBatch = spriteBatch;

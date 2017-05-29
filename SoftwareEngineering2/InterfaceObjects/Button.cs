@@ -36,54 +36,5 @@ namespace SoftwareEngineering2.InterfaceObjects
         {
             visitor.Visit(this);
         }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-
-            ////fill in the pixels of the texture2D
-            //Color[] colorData = new Color[Texture.Width * Texture.Height];
-
-            //for (int i = 0; i < Texture.Height * Texture.Width; i++)
-            //{
-            //    colorData[i] = BackgroundColor;
-            //}
-
-            //Texture.SetData(colorData);
-
-            ////textScale
-            //Vector2 size = Game1.Font.MeasureString(ButtonText);
-            //float xScale = (Texture.Width / size.X);
-            //float yScale = (Texture.Height / size.Y);
-            //Scale = Math.Min(xScale, yScale);
-
-            //Vector2 stringDimensions = new Vector2((int)Math.Round(size.X * Scale), (int)Math.Round(size.Y * Scale));
-            //ButtonLabelPosition = new Vector2(Position.X + (Texture.Width / 2) - (stringDimensions.X / 2), Position.Y + (Texture.Height / 2) - (stringDimensions.Y / 2));
-
-
-
-            //// adapter aanroepen
-            //IDrawingManager drawManager = new MonoGameDrawingManager(spriteBatch);
-            //drawManager.Draw(this);
-        }
-
-        public void Update()
-        {
-            ////checked if button is hovering
-            //if (!(Mouse.GetState().Position.X < (Position.X + Texture.Width)) ||
-            //    !(Mouse.GetState().Position.X > Position.X) ||
-            //    !(Mouse.GetState().Position.Y < (Position.Y + Texture.Height)) ||
-            //    !(Mouse.GetState().Position.Y > Position.Y))
-            //{
-            //    BackgroundColor = Color.Black;
-            //    return;
-            //}
-            //// IsHOVERING
-            //BackgroundColor = Color.Red;
-            //if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            //{
-            //    // IS clicked
-            //    Game1.CurrentScreen = GoToWindow;
-            //}
-        }
     }
 }
