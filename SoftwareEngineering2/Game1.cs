@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SoftwareEngineering2.Factory;
 using SoftwareEngineering2.Visitor;
 using SoftwareEngineering2.InterfaceObjects;
 using SoftwareEngineering2.Iterator;
@@ -17,7 +18,7 @@ namespace SoftwareEngineering2
         private IVisitor _drawVisitor;
         private IVisitor _updateVisitor;
 
-        private IGuiElementCollection collection;
+        private IGuiElementCollection _collection;
 
         readonly GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
@@ -25,15 +26,15 @@ namespace SoftwareEngineering2
         public static SpriteFont Font;
 
         public static ScreenManager CurrentScreen;
-
-        private List<IGuiElement> mainWindowElements, labelWindowElements, inputWindowElements;
+        
+        private readonly IAbstractFactory _screenFactory;
 
         public Game1()
         {
-
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+            _screenFactory = new ScreenFactory(_graphics);
+
             CurrentScreen = ScreenManager.MainWindow;
         }
 
@@ -64,36 +65,7 @@ namespace SoftwareEngineering2
             _drawVisitor = new DrawVisitor(_spriteBatch);
             _updateVisitor = new UpdateVisitor(_spriteBatch);
 
-            //MainWindow
-            mainWindowElements = new List<IGuiElement>()
-            {
-                new Label("MainWindow", new Vector2(5, 5), Color.Black),
-                new Button(Color.Black, Color.White, new Vector2(250, 50), "Input window",
-                    new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.InputWindow),
-                new Button(Color.Black, Color.White, new Vector2(250, 100), "Label window",
-                    new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.LabelWindow),
-                new Button(Color.Black, Color.White, new Vector2(250, 250), "Exit",
-                    new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.Exit)
-            };
-
-            labelWindowElements = new List<IGuiElement>()
-            {
-                new Label("LabelWindow", new Vector2(5, 5), Color.Black),
-                new Label("I am a label", new Vector2(250, 50), Color.Black),
-                new Button(Color.Black, Color.White, new Vector2(250, 150), "Back",
-                    new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.MainWindow)
-            };
-
-            inputWindowElements = new List<IGuiElement>()
-            {
-                new Label("InputWindow", new Vector2(5, 5), Color.Black),
-                new TextField(Color.White, Color.Black, new Vector2(250, 90), new List<char>(), new Texture2D(_graphics.GraphicsDevice, 150, 40)),
-                new Button(Color.Black, Color.White, new Vector2(250, 150), "Back",
-                    new Texture2D(_graphics.GraphicsDevice, 150, 40), ScreenManager.MainWindow)
-            };
-
-            collection = new GuiElementCollection(mainWindowElements);
-
+            _collection = _screenFactory.CreateMainScreen();
         }
 
         /// <summary>
@@ -116,7 +88,7 @@ namespace SoftwareEngineering2
                 Exit();
 
 
-            IIterator iterator = collection.Iterator();
+            IIterator iterator = _collection.Iterator();
             while (iterator.HasNext())
             {
                 var guiElement = iterator.Next();
@@ -127,34 +99,19 @@ namespace SoftwareEngineering2
             switch (CurrentScreen)
             {
                 case ScreenManager.MainWindow:
-                    UpdateMainWindow(gameTime);
+                    _collection = _screenFactory.CreateMainScreen();
                     break;
                 case ScreenManager.InputWindow:
-                    UpdateInputWindow(gameTime);
+                    _collection = _screenFactory.CreatInputScreen();
                     break;
                 case ScreenManager.LabelWindow:
-                    UpdateLabelWindow(gameTime);
+                    _collection = _screenFactory.CreateLabelScreen();
                     break;
                 case ScreenManager.Exit:
                     Exit();
                     break;
             }
             base.Update(gameTime);
-        }
-
-        void UpdateMainWindow(GameTime gameTime)
-        {
-            collection = new GuiElementCollection(mainWindowElements);
-        }
-
-        void UpdateLabelWindow(GameTime gameTime)
-        {
-            collection = new GuiElementCollection(labelWindowElements);
-        }
-
-        void UpdateInputWindow(GameTime gameTime)
-        {
-            collection = new GuiElementCollection(inputWindowElements);
         }
 
         /// <summary>
@@ -166,7 +123,7 @@ namespace SoftwareEngineering2
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            IIterator iterator = collection.Iterator();
+            IIterator iterator = _collection.Iterator();
             while (iterator.HasNext())
             {
                 var x = iterator.Next();

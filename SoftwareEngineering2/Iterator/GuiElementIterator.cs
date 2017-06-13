@@ -9,7 +9,7 @@ namespace SoftwareEngineering2.Iterator
 {
     class GuiElementIterator : IIterator
     {
-        private List<IGuiElement> _guiElements;
+        private readonly List<IGuiElement> _guiElements;
         private int _position;
         public GuiElementIterator(List<IGuiElement> guiElements)
         {
