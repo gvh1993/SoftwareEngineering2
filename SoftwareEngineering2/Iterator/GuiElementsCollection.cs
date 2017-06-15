@@ -9,7 +9,6 @@ namespace SoftwareEngineering2.Iterator
 {
     class GuiElementCollection : IGuiElementCollection
     {
-
         public List<IGuiElement> GuiElements { get; set; }
 
         public GuiElementCollection(List<IGuiElement> guiElements)
