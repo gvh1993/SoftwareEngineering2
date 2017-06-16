@@ -17,28 +17,6 @@ namespace SoftwareEngineering2.Adapter
         {
             _spriteBatch = spriteBatch;
         }
-        //public void Draw(Button button)
-        //{
-        //    _spriteBatch.Begin();
-        //    _spriteBatch.Draw(button.Texture, new Rectangle((int)button.Position.X, (int)button.Position.Y, (int)button.Texture.Width, (int)button.Texture.Height), button.BackgroundColor);
-        //    _spriteBatch.DrawString(Game1.Font, button.ButtonText, button.ButtonLabelPosition, Color.White, 0.0f, new Vector2(0, 0), button.Scale, new SpriteEffects(), 0.0f);
-        //    _spriteBatch.End();
-        //}
-
-        //public void Draw(TextField textField)
-        //{
-        //    _spriteBatch.Begin();
-        //    _spriteBatch.Draw(textField.Texture, new Rectangle((int)textField.Position.X, (int)textField.Position.Y, (int)textField.Texture.Width, (int)textField.Texture.Height), textField.BackgroundColor);
-        //    _spriteBatch.DrawString(Game1.Font, textField.TextString, textField.Position, textField.TextColor);
-        //    _spriteBatch.End();
-        //}
-
-        //public void Draw(Label label)
-        //{
-        //    _spriteBatch.Begin();
-        //    _spriteBatch.DrawString(Game1.Font, label.LabelGuiElement.LabelText, label.LabelGuiElement.Position, label.LabelGuiElement.TextColor);
-        //    _spriteBatch.End();
-        //}
         public void Draw(LabelDecorator label)
         {
               _spriteBatch.Begin();

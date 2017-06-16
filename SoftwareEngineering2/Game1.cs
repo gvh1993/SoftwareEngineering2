@@ -18,10 +18,9 @@ namespace SoftwareEngineering2
         private IVisitor _drawVisitor;
         private IVisitor _updateVisitor;
 
-        private IGuiElementCollection mainWindowElements, labelWindowElements, inputWindowElements;
+        private IGuiElementCollection _mainWindowElements, _labelWindowElements, _inputWindowElements;
         private IGuiElementCollection _collection;
 
-        readonly GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
         public static SpriteFont Font;
@@ -32,11 +31,9 @@ namespace SoftwareEngineering2
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            var graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            _screenFactory = new ScreenFactory(_graphics);
-
-
+            _screenFactory = new ScreenFactory(graphics);
 
             CurrentScreen = ScreenManager.MainWindow;
         }
@@ -68,9 +65,9 @@ namespace SoftwareEngineering2
             _drawVisitor = new DrawVisitor(_spriteBatch);
             _updateVisitor = new UpdateVisitor();
 
-            mainWindowElements = _screenFactory.CreateMainScreen();
-            labelWindowElements = _screenFactory.CreateLabelScreen();
-            inputWindowElements = _screenFactory.CreatInputScreen();
+            _mainWindowElements = _screenFactory.CreateMainScreen();
+            _labelWindowElements = _screenFactory.CreateLabelScreen();
+            _inputWindowElements = _screenFactory.CreatInputScreen();
 
             _collection = _screenFactory.CreateMainScreen();
         }
@@ -98,13 +95,13 @@ namespace SoftwareEngineering2
             switch (CurrentScreen)
             {
                 case ScreenManager.MainWindow:
-                    _collection = mainWindowElements;
+                    _collection = _mainWindowElements;
                     break;
                 case ScreenManager.InputWindow:
-                    _collection = inputWindowElements;
+                    _collection = _inputWindowElements;
                     break;
                 case ScreenManager.LabelWindow:
-                    _collection = labelWindowElements;
+                    _collection = _labelWindowElements;
                     break;
                 case ScreenManager.Exit:
                     Exit();
@@ -134,8 +131,8 @@ namespace SoftwareEngineering2
             IIterator iterator = _collection.Iterator();
             while (iterator.HasNext())
             {
-                var x = iterator.Next();
-                x.Accept(_drawVisitor);
+                var guiElement = iterator.Next();
+                guiElement.Accept(_drawVisitor);
             }
             
             base.Draw(gameTime);

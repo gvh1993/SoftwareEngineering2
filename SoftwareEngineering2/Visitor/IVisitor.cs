@@ -10,10 +10,6 @@ namespace SoftwareEngineering2.Visitor
 {
     interface IVisitor
     {
-        
-        //void Visit(Button button);
-        //void Visit(Label label);
-        //void Visit(TextField textField);
         void Visit(LabelDecorator label);
         void Visit(ClickableDecorator clickable);
         void Visit(InputDecorator input);

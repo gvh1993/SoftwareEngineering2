@@ -18,7 +18,6 @@ namespace SoftwareEngineering2.Factory
         public ScreenFactory(GraphicsDeviceManager graphicsDeviceManager)
         {
             _graphicsDeviceManager = graphicsDeviceManager;
-           
         }
 
         public IGuiElementCollection CreateMainScreen()
@@ -37,16 +36,8 @@ namespace SoftwareEngineering2.Factory
 
                 new LabelDecorator(new ClickableDecorator(new BasicGuiElement(new Vector2(250, 250)), Color.Black, Color.Red,
                             new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.Exit), "Exit Window", Color.White),
-
-
-               // new Label("MainWindow", new Vector2(5, 5), Color.Black),
-                //new Button(Color.Black, Color.White, new Vector2(250, 50), "Input window",
-                //    new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.InputWindow),
-                //new Button(Color.Black, Color.White, new Vector2(250, 100), "Label window",
-                //    new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.LabelWindow),
-                //new Button(Color.Black, Color.White, new Vector2(250, 250), "Exit",
-                //    new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.Exit)
             };
+
             _collection = new GuiElementCollection(mainWindowElements);
 
             return _collection;
@@ -62,12 +53,8 @@ namespace SoftwareEngineering2.Factory
 
                 new LabelDecorator(new ClickableDecorator(new BasicGuiElement(new Vector2(250, 150)), Color.Black, Color.Red,
                             new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.MainWindow), "Back", Color.White),
-
-                //new Label("InputWindow", new Vector2(5, 5), Color.Black),
-                //new TextField(Color.White, Color.Black, new Vector2(250, 90), new List<char>(), new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40)),
-                //new Button(Color.Black, Color.White, new Vector2(250, 150), "Back",
-                //    new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.MainWindow)
             };
+
             _collection = new GuiElementCollection(inputWindowElements);
 
             return _collection;
@@ -83,12 +70,8 @@ namespace SoftwareEngineering2.Factory
 
                 new LabelDecorator(new ClickableDecorator(new BasicGuiElement(new Vector2(250, 150)), Color.Black, Color.Red,
                             new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.MainWindow), "Back", Color.White),
-
-                //new Label("LabelWindow", new Vector2(5, 5), Color.Black),
-                //new Label("I am a label", new Vector2(250, 50), Color.Black),
-                //new Button(Color.Black, Color.White, new Vector2(250, 150), "Back",
-                //    new Texture2D(_graphicsDeviceManager.GraphicsDevice, 150, 40), ScreenManager.MainWindow)
             };
+
             _collection = new GuiElementCollection(labelWindowElements);
 
             return _collection;

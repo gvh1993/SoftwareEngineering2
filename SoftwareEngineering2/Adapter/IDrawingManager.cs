@@ -11,14 +11,8 @@ namespace SoftwareEngineering2.Adapter
 {
     interface IDrawingManager
     {
-        //void Draw(Button button);
-        //void Draw(TextField textField);
-        //void Draw(Label label);
-
         void Draw(LabelDecorator label);
         void Draw(ClickableDecorator clickable);
-
         void Draw(InputDecorator input);
-
     }
 }
