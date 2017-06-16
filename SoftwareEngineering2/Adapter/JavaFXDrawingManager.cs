@@ -36,5 +36,10 @@ namespace SoftwareEngineering2.Adapter
         {
             throw new NotImplementedException();
         }
+
+        public void Draw(InputDecorator input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

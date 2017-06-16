@@ -23,10 +23,8 @@ namespace SoftwareEngineering2.Decorator
 
         public override void Accept(IVisitor visitor)
         {
-            //visitor.Visit(GuiElement);
             GuiElement.Accept(visitor);
             visitor.Visit(this);
-
         }
     }
 }

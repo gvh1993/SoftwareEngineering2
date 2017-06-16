@@ -52,5 +52,13 @@ namespace SoftwareEngineering2.Adapter
             _spriteBatch.Draw(clickable.Texture, new Rectangle((int)clickable.GetPosition().X, (int)clickable.GetPosition().Y, (int)clickable.Texture.Width, (int)clickable.Texture.Height), clickable.BackgroundColor);
             _spriteBatch.End();
         }
+
+        public void Draw(InputDecorator input)
+        {
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(input.Texture, new Rectangle((int)input.GetPosition().X, (int)input.GetPosition().Y, (int)input.Texture.Width, (int)input.Texture.Height), input.BackgroundColor);
+            _spriteBatch.DrawString(Game1.Font, input.TextString, input.GetPosition(), input.TextColor);
+            _spriteBatch.End();
+        }
     }
 }

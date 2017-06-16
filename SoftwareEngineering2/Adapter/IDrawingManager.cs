@@ -18,5 +18,7 @@ namespace SoftwareEngineering2.Adapter
         void Draw(LabelDecorator label);
         void Draw(ClickableDecorator clickable);
 
+        void Draw(InputDecorator input);
+
     }
 }

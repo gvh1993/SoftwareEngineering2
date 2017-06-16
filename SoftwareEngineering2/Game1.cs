@@ -18,6 +18,7 @@ namespace SoftwareEngineering2
         private IVisitor _drawVisitor;
         private IVisitor _updateVisitor;
 
+        private IGuiElementCollection mainWindowElements, labelWindowElements, inputWindowElements;
         private IGuiElementCollection _collection;
 
         readonly GraphicsDeviceManager _graphics;
@@ -34,6 +35,8 @@ namespace SoftwareEngineering2
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             _screenFactory = new ScreenFactory(_graphics);
+
+
 
             CurrentScreen = ScreenManager.MainWindow;
         }
@@ -63,7 +66,11 @@ namespace SoftwareEngineering2
             
             // TODO: use this.Content to load your game content here
             _drawVisitor = new DrawVisitor(_spriteBatch);
-            _updateVisitor = new UpdateVisitor(_spriteBatch);
+            _updateVisitor = new UpdateVisitor();
+
+            mainWindowElements = _screenFactory.CreateMainScreen();
+            labelWindowElements = _screenFactory.CreateLabelScreen();
+            inputWindowElements = _screenFactory.CreatInputScreen();
 
             _collection = _screenFactory.CreateMainScreen();
         }
@@ -87,6 +94,23 @@ namespace SoftwareEngineering2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // TODO: Add your update logic here
+            switch (CurrentScreen)
+            {
+                case ScreenManager.MainWindow:
+                    _collection = mainWindowElements;
+                    break;
+                case ScreenManager.InputWindow:
+                    _collection = inputWindowElements;
+                    break;
+                case ScreenManager.LabelWindow:
+                    _collection = labelWindowElements;
+                    break;
+                case ScreenManager.Exit:
+                    Exit();
+                    break;
+            }
+
 
             IIterator iterator = _collection.Iterator();
             while (iterator.HasNext())
@@ -95,22 +119,6 @@ namespace SoftwareEngineering2
                 guiElement.Accept(_updateVisitor);
             }
 
-            // TODO: Add your update logic here
-            switch (CurrentScreen)
-            {
-                case ScreenManager.MainWindow:
-                    _collection = _screenFactory.CreateMainScreen();
-                    break;
-                case ScreenManager.InputWindow:
-                    _collection = _screenFactory.CreatInputScreen();
-                    break;
-                case ScreenManager.LabelWindow:
-                    _collection = _screenFactory.CreateLabelScreen();
-                    break;
-                case ScreenManager.Exit:
-                    Exit();
-                    break;
-            }
             base.Update(gameTime);
         }
 

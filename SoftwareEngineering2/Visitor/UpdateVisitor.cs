@@ -15,6 +15,7 @@ namespace SoftwareEngineering2.Visitor
 {
     class UpdateVisitor : IVisitor
     {
+
         public void Visit(LabelDecorator label)
         {
             // don't need to update a label right?
@@ -35,7 +36,7 @@ namespace SoftwareEngineering2.Visitor
                 return;
             }
             // IsHOVERING
-            clickable.BackgroundColor = Color.Red;
+            clickable.BackgroundColor = clickable.HoverBackgroundColor;
             if (manager.GetMouseInput().LeftButton == ButtonState.Pressed)
             {
                 // IS clicked
@@ -45,7 +46,39 @@ namespace SoftwareEngineering2.Visitor
 
         public void Visit(InputDecorator input)
         {
-            throw new NotImplementedException();
+            IInputManager manager = new InputManager();
+
+            if (manager.GetKeyboardInput().GetPressedKeys().Length == 0)
+                return;
+
+            var key = manager.GetKeyboardInput().GetPressedKeys()[0];
+            switch (key)
+            {
+                case Keys.Space:
+                    input.Text.Insert(input.Cursor, ' ');
+                    input.Cursor++;
+                    break;
+                case Keys.Back:
+                    if (input.Text.Count == 0)
+                        break;
+                    input.Text.RemoveAt(input.Cursor - 1);
+                    input.Cursor--;
+                    break;
+                default:
+                    //add to list where cursor is
+                    //increment cursor
+                    try
+                    {
+                        input.Text.Insert(input.Cursor, Convert.ToChar(key.ToString()));
+                        input.Cursor++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+
+                    break;
+            }
         }
 
         public void Visit(IGuiElement guiElement)
@@ -53,11 +86,7 @@ namespace SoftwareEngineering2.Visitor
             // for BasicGuiElement
         }
 
-        private readonly SpriteBatch _spriteBatch;
-        public UpdateVisitor(SpriteBatch spriteBatch)
-        {
-            _spriteBatch = spriteBatch;
-        }
+
 
         //public void Visit(Button button)
         //{

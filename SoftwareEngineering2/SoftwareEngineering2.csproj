@@ -58,7 +58,6 @@
     <Compile Include="InterfaceObjects\Button.cs" />
     <Compile Include="InterfaceObjects\IGuiElement.cs" />
     <Compile Include="InterfaceObjects\Label.cs" />
-    <Compile Include="InterfaceObjects\LabelGuiElement.cs" />
     <Compile Include="InterfaceObjects\TextField.cs" />
     <Compile Include="Iterator\IGuiElementCollection.cs" />
     <Compile Include="Iterator\IIterator.cs" />
