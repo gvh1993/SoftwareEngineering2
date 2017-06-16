@@ -5,34 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SoftwareEngineering2.InterfaceObjects;
 using SoftwareEngineering2.Visitor;
-using Microsoft.Xna.Framework.Input;
 
-namespace SoftwareEngineering2.InterfaceObjects
+namespace SoftwareEngineering2.Decorator
 {
-    class TextField : IGuiElement
+    class InputDecorator : GuiElementDecorator
     {
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
-        public Vector2 Position { get; set; }
         public List<char> Text { get; set; }
         public Texture2D Texture { get; set; }
         public int Cursor { get; set; }
         public string TextString { get; set; }
 
-        public TextField(Color backgroundColor, Color textColor, Vector2 position, List<char> text, Texture2D texture)
+        public InputDecorator(IGuiElement guiElement, Color backgroundColor, Color textColor, List<char> text, Texture2D texture) : base(guiElement)
         {
             BackgroundColor = backgroundColor;
             TextColor = textColor;
-            Position = position;
             Text = text;
             Texture = texture;
         }
 
-        public void Accept(IVisitor visitor)
+        public override void Accept(IVisitor visitor)
         {
-            visitor.Visit(this);
+            GuiElement.Accept(visitor); //visit parameter GuiElement
+            visitor.Visit(this);//visit with this object
         }
     }
 }
-

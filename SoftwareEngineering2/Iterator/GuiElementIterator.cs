@@ -15,6 +15,7 @@ namespace SoftwareEngineering2.Iterator
         {
             _guiElements = guiElements;
         }
+
         public bool HasNext()
         {
             if (_position < _guiElements.Count())

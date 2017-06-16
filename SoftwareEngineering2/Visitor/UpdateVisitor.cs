@@ -9,49 +9,49 @@ using Microsoft.Xna.Framework.Input;
 using SoftwareEngineering2.InterfaceObjects;
 using Microsoft.Xna.Framework;
 using SoftwareEngineering2.Adapter;
+using SoftwareEngineering2.Decorator;
 
 namespace SoftwareEngineering2.Visitor
 {
     class UpdateVisitor : IVisitor
     {
-        private readonly SpriteBatch _spriteBatch;
-        public UpdateVisitor(SpriteBatch spriteBatch)
+        public void Visit(IGuiElement guiElement)
         {
-            _spriteBatch = spriteBatch;
+            // for BasicGuiElement
         }
 
-        public void Visit(Button button)
+        public void Visit(LabelDecorator label)
+        {
+            // don't need to update a label right?
+        }
+
+        public void Visit(ClickableDecorator clickable)
         {
             //update button
-            //checked if button is hovering
-            IInputManager manager = new InputManager();
-            
-            if (!(manager.GetMouseInput().Position.X < (button.Position.X + button.Texture.Width)) ||
-                !(manager.GetMouseInput().Position.X > button.Position.X) ||
-                !(manager.GetMouseInput().Position.Y < (button.Position.Y + button.Texture.Height)) ||
-                !(manager.GetMouseInput().Position.Y > button.Position.Y))
+                //checked if button is hovering
+                IInputManager manager = new InputManager();
+
+            if (!(manager.GetMouseInput().Position.X < (clickable.GetPosition().X + clickable.Texture.Width)) ||
+                !(manager.GetMouseInput().Position.X > clickable.GetPosition().X) ||
+                !(manager.GetMouseInput().Position.Y < (clickable.GetPosition().Y + clickable.Texture.Height)) ||
+                !(manager.GetMouseInput().Position.Y > clickable.GetPosition().Y))
             {
-                button.BackgroundColor = Color.Black;
+                clickable.BackgroundColor = Color.Black;
                 return;
             }
             // IsHOVERING
-            button.BackgroundColor = Color.Red;
+            clickable.BackgroundColor = clickable.HoverBackgroundColor;
             if (manager.GetMouseInput().LeftButton == ButtonState.Pressed)
             {
                 // IS clicked
-                Game1.CurrentScreen = button.GoToWindow;
+                Game1.CurrentScreen = clickable.GoToWindow;
             }
         }
 
-        public void Visit(Label label)
-        {
-            //dont have to update a label right?
-        }
-
-        public void Visit(TextField textField)
+        public void Visit(InputDecorator input)
         {
             IInputManager manager = new InputManager();
-            
+
             if (manager.GetKeyboardInput().GetPressedKeys().Length == 0)
                 return;
 
@@ -59,22 +59,22 @@ namespace SoftwareEngineering2.Visitor
             switch (key)
             {
                 case Keys.Space:
-                    textField.Text.Insert(textField.Cursor, ' ');
-                    textField.Cursor++;
+                    input.Text.Insert(input.Cursor, ' ');
+                    input.Cursor++;
                     break;
                 case Keys.Back:
-                    if (textField.Text.Count == 0)
+                    if (input.Text.Count == 0)
                         break;
-                    textField.Text.RemoveAt(textField.Cursor - 1);
-                    textField.Cursor--;
+                    input.Text.RemoveAt(input.Cursor - 1);
+                    input.Cursor--;
                     break;
                 default:
                     //add to list where cursor is
                     //increment cursor
                     try
                     {
-                        textField.Text.Insert(textField.Cursor, Convert.ToChar(key.ToString()));
-                        textField.Cursor++;
+                        input.Text.Insert(input.Cursor, Convert.ToChar(key.ToString()));
+                        input.Cursor++;
                     }
                     catch (Exception ex)
                     {

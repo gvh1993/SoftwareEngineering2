@@ -5,26 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SoftwareEngineering2.Visitor;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace SoftwareEngineering2.InterfaceObjects
 {
-    class Label : IGuiElement
+    class BasicGuiElement : IGuiElement
     {
-        public string LabelText { get; set; }
         public Vector2 Position { get; set; }
-        public Color TextColor { get; set; }
 
-        public Label(string labelText, Vector2 position, Color textColor )  
+        public BasicGuiElement(Vector2 position)
         {
-            LabelText = labelText;
             Position = position;
-            TextColor = textColor;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return Position;
         }
 
         public void Accept(IVisitor visitor)
         {
-            visitor.Visit(this);
+           //visitor.Visit(this);  //not needed to visit basic gui element visitor
         }
     }
 }
